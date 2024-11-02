@@ -9,18 +9,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: repository check
-        uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: install dependesies 
-        run: npm ci
-
-      - name: create site
-        run: npm run build
-
+      - name: Copy files
+        run: |
+          VERSION=${{  github.ref_name }}
+          mkdir -p "./pages/${VERSION}"
+          cp -r ./en "./pages/${VERSION}/"
+          cp -r ./ru "./pages/${VERSION}/"
+          cp -r ./index.html "./pages/${VERSION}/"
+          cp -r ./README.md "./pages/${VERSION}/"
+        
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          destination_dir: ${{ github.event.release.tag_name }}
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           publish_dir: ./pages
+           keep_files: true

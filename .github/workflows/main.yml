@@ -16,7 +16,7 @@ jobs:
         run: |
           VERSION=${{  github.ref_name }}
           mkdir -p "./pages/${VERSION}"
-          cp -r ./en "./pages/${VERSION}/"
+          cp -r ./eng "./pages/${VERSION}/"
           cp -r ./ru "./pages/${VERSION}/"
           cp -r ./index.html "./pages/${VERSION}/"
           cp -r ./README.md "./pages/${VERSION}/"

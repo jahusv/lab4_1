@@ -15,14 +15,14 @@ jobs:
       - name: copy
         run: |
           VERSION=${{  github.ref_name }}
-          mkdir -p "./pages/${VERSION}"
-          cp -r ./eng "./pages/${VERSION}/"
-          cp -r ./ru "./pages/${VERSION}/"
-          cp -r ./index.html "./pages/${VERSION}/"
+          mkdir -p "./done/${directory}"
+          cp -r ./eng "./done/${directory}/"
+          cp -r ./ru "./done/${directory}/"
+          cp -r ./index.html "./done/${directory}/"
         
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
-           publish_dir: ./pages
+           publish_dir: ./done
            keep_files: true

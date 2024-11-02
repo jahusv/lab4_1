@@ -9,17 +9,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: check
         uses: actions/checkout@v4
 
-      - name: Copy files
+      - name: copy
         run: |
           VERSION=${{  github.ref_name }}
           mkdir -p "./pages/${VERSION}"
           cp -r ./eng "./pages/${VERSION}/"
           cp -r ./ru "./pages/${VERSION}/"
           cp -r ./index.html "./pages/${VERSION}/"
-          cp -r ./README.md "./pages/${VERSION}/"
         
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
